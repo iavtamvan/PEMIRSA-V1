@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Form">
+        <menu>
+            <item
+                android:id="@+id/nav_daftar_pengurus"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Daftar Pengurus" />
+            <item
+                android:id="@+id/nav_penggunaan_ruangan"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Penggunaan Ruangan" />
+        </menu>
+    </item>
+    <item android:title="Data">
+        <menu>
+            <item
+                android:id="@+id/nav_data_pengurus"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Data Pengurus" />
+            <item
+                android:id="@+id/nav_data_penggunaan_ruangan"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Riwayat Penggunaan Ruangan" />
+            <item
+                android:id="@+id/nav_data_cek_penggunaan_ruangan"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Cek Ruangan Kosong" />
+        </menu>
+    </item>
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/nav_profil"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Profil" />
+            <item
+                android:id="@+id/nav_keluar"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Keluar" />
+        </menu>
+    </item>
+</menu>
