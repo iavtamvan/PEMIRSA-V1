@@ -2,10 +2,11 @@
 <resources>
     <color name="colorPrimary">#2196f3</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#2196f3</color>
 
 
     <color name="colorHijau">#629c44</color>
     <color name="colorBiru">#2196f3</color>
     <color name="colorAbuAbu">#cccccc</color>
+    <color name="colorAbuAbuGelap">#7c7c7c</color>
 </resources>

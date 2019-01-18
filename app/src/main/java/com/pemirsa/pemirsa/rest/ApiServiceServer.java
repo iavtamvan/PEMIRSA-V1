@@ -1,5 +1,7 @@
 package com.pemirsa.pemirsa.rest;
 
+import com.pemirsa.pemirsa.model.AnggotaModel;
+import com.pemirsa.pemirsa.model.CountDataModel;
 import com.pemirsa.pemirsa.model.LoginModel;
 
 import java.util.ArrayList;
@@ -17,9 +19,16 @@ public interface ApiServiceServer {
     @GET("login/{username}/{password}")
     Call<ArrayList<LoginModel>> getLogin(@Path("username") String username,
                                          @Path("password") String password);
-//    @GET("userv1/{id}")
-//    Call<ArrayList<LoginModel>> getLogin(@Path("username") String username,
-//                                         @Path("password") String password);
+    @GET("anggota/count/{id}")
+    Call<ArrayList<CountDataModel>> getDataCount(@Path("id") String id);
+    @GET("anggota/{id}")
+    Call<ArrayList<AnggotaModel>> getDataAnggota(@Path("id") String id);
+
+
+
+
+
+
     @GET("getLatLong.php")
     Call<ResponseBody> getTps();
     @FormUrlEncoded

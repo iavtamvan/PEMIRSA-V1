@@ -33,6 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Username"
+                android:text="himforma"
                 android:id="@+id/edt_username"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -43,6 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
+                android:text="123"
+                android:inputType="textPassword"
                 android:id="@+id/edt_password"/>
 
         </android.support.design.widget.TextInputLayout>

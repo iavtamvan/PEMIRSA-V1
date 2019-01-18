@@ -10,9 +10,33 @@ public class LoginModel {
     @SerializedName("nama_organisasi")
     @Expose
     private String namaOrganisasi;
+    @SerializedName("jenis_organisasi")
+    @Expose
+    private String jenis_organisasi;
+
+    public String getJenis_organisasi() {
+        return jenis_organisasi;
+    }
+
+    public void setJenis_organisasi(String jenis_organisasi) {
+        this.jenis_organisasi = jenis_organisasi;
+    }
+
     @SerializedName("email")
     @Expose
     private String email;
+    @SerializedName("deskripsi_organisasi")
+    @Expose
+    private String deskripsi_organisasi;
+
+    public String getDeskripsi_organisasi() {
+        return deskripsi_organisasi;
+    }
+
+    public void setDeskripsi_organisasi(String deskripsi_organisasi) {
+        this.deskripsi_organisasi = deskripsi_organisasi;
+    }
+
     @SerializedName("nama_ketua")
     @Expose
     private String namaKetua;
