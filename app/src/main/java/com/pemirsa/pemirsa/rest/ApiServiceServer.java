@@ -4,6 +4,7 @@ import com.pemirsa.pemirsa.model.AnggotaModel;
 import com.pemirsa.pemirsa.model.CountDataModel;
 import com.pemirsa.pemirsa.model.ErrorMsgModel;
 import com.pemirsa.pemirsa.model.ListDaftarPengurusModel;
+import com.pemirsa.pemirsa.model.ListRuanganModel;
 import com.pemirsa.pemirsa.model.LoginModel;
 import com.pemirsa.pemirsa.model.Result;
 
@@ -28,9 +29,16 @@ public interface ApiServiceServer {
     @GET("anggota/count/{id}")
     Call<ArrayList<CountDataModel>> getDataCount(@Path("id") String id);
     @GET("anggota/{id}")
-    Call<ArrayList<AnggotaModel>> getDataAnggota(@Path("id") String id);
+    Call<ArrayList<AnggotaModel>> getDataAnggotaId(@Path("id") String id);
+
+    @GET("anggota/prodi/{prodi}/{status_anggota}")
+    Call<ArrayList<AnggotaModel>> getDataAnggotaAllProdidanStatusAnggota(@Path("prodi") String prodi,
+                                                                         @Path("status_anggota") String status);
     @GET("listdaftarpengurus/{type}")
     Call<ArrayList<ListDaftarPengurusModel>> getDataListDaftarPengurus(@Path("type") String id);
+
+    @GET("listruangan/status/{status_ruangan}")
+    Call<ArrayList<ListRuanganModel>> getDataListRuangan(@Path("status_ruangan") String status);
 
     @FormUrlEncoded
     @POST("anggota")
@@ -44,6 +52,24 @@ public interface ApiServiceServer {
                                                     @Field("url_foto_ktm_anggota") String url_foto_ktm_anggota,
                                                     @Field("url_foto_anggota") String url_foto_anggota,
                                                     @Field("status_anggota") String status_anggota);
+    @FormUrlEncoded
+    @POST("daftarruangan")
+    Call<ArrayList<ErrorMsgModel>> postDataPenggunaanRuangan(@Field("id_user") String id_user,
+                                                        @Field("id_anggota") String id_anggota,
+                                                        @Field("nama_daftar_ruangan") String nama_daftar_ruangan,
+                                                        @Field("nama_acara") String nama_acara,
+                                                        @Field("deskripsi_acara") String deskripsi_acara,
+                                                        @Field("tgl_mulai_daftar_ruangan") String tgl_mulai_daftar_ruangan,
+                                                        @Field("tgl_selesai_daftar_ruangan") String tgl_selesai_daftar_ruangan,
+                                                        @Field("jam_mulai_daftar_ruangan") String jam_mulai_daftar_ruangan,
+                                                        @Field("jam_selesai_daftar_ruangan") String jam_selesai_daftar_ruangan,
+                                                        @Field("nama_organisasi_daftar_ruangan") String nama_organisasi_daftar_ruangan,
+                                                        @Field("pj_daftar_ruangan") String pj_daftar_ruangan,
+                                                        @Field("jumlah_peserta_daftar_ruangan") String jumlah_peserta_daftar_ruangan,
+                                                        @Field("url_file_daftar_ruangan") String url_file_daftar_ruangan,
+                                                        @Field("url_foto_pj") String url_foto_pj,
+                                                        @Field("status_daftar_ruangan") String status_daftar_ruangan,
+                                                        @Field("token_daftar_ruangan") String token_daftar_ruangan);
 
     @GET("getLatLong.php")
     Call<ResponseBody> getTps();

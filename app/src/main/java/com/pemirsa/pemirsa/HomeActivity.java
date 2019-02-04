@@ -15,11 +15,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.fastaccess.datetimepicker.callback.DatePickerCallback;
+import com.fastaccess.datetimepicker.callback.TimePickerCallback;
+import com.pemirsa.pemirsa.ui.fragment.form.DaftarPenggunaanRuanganFragment;
 import com.pemirsa.pemirsa.ui.fragment.form.DaftarPengurusFragment;
 import com.pemirsa.pemirsa.ui.fragment.HomeFragment;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, DatePickerCallback, TimePickerCallback {
     private FragmentManager fragmentManager;
     FloatingActionButton fab;
 
@@ -104,7 +107,10 @@ public class HomeActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.containerViewPager, new DaftarPengurusFragment()).commit();
             getSupportActionBar().setTitle("Daftar Pengurus");
         }  else if (id == R.id.nav_penggunaan_ruangan) {
-
+            fab.setVisibility(View.GONE);
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.containerViewPager, new DaftarPenggunaanRuanganFragment()).commit();
+            getSupportActionBar().setTitle("Daftar Penggunaan Ruangan");
         } else if (id == R.id.nav_data_pengurus) {
 
         } else if (id == R.id.nav_data_penggunaan_ruangan) {
@@ -120,5 +126,20 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onDateSet(long date) {
+
+    }
+
+    @Override
+    public void onTimeSet(long timeOnly, long dateWithTime) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

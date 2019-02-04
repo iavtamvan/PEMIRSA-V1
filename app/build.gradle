@@ -47,6 +47,7 @@ dependencies {
     implementation 'io.supercharge:shimmerlayout:2.1.0'
 
     implementation 'pub.devrel:easypermissions:2.0.1'
+    implementation 'com.github.k0shk0sh:RetainedDateTimePickers:1.0.2'
 
 
 }
