@@ -1,5 +1,6 @@
 package com.pemirsa.pemirsa.ui.activity;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,8 +14,12 @@ import com.pemirsa.pemirsa.presenter.LoginPresenter;
 
 import java.util.ArrayList;
 
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+
 public class LoginActivity extends AppCompatActivity {
 
+    private static final int RC_CAMERA_AND_LOCATION = 1;
     private ImageView ivLogin;
     private EditText edtUsername;
     private EditText edtPassword;
@@ -31,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loginModel = new ArrayList<>();
         loginPresenter = new LoginPresenter();
+        methodRequiresTwoPermission();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +46,19 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+    @AfterPermissionGranted(RC_CAMERA_AND_LOCATION)
+    private void methodRequiresTwoPermission() {
+        String[] perms = {Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_COARSE_LOCATION};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            // Already have permission, do the thing
+            // ...
+        } else {
+            // Do not have permissions, request them now
+            EasyPermissions.requestPermissions(this, getString(R.string.app_name),
+                    RC_CAMERA_AND_LOCATION, perms);
+        }
     }
 
     private void initView() {

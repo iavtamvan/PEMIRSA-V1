@@ -46,6 +46,7 @@ dependencies {
     implementation 'com.ethanhua:skeleton:1.1.2'
     implementation 'io.supercharge:shimmerlayout:2.1.0'
 
+    implementation 'pub.devrel:easypermissions:2.0.1'
 
 
 }

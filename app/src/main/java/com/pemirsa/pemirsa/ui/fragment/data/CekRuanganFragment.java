@@ -1,4 +1,4 @@
-package com.pemirsa.pemirsa.ui.fragment;
+package com.pemirsa.pemirsa.ui.fragment.data;
 
 
 import android.os.Bundle;

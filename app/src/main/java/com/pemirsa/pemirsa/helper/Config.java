@@ -5,6 +5,7 @@ public final class Config {
 
 
     public static final String ERROR_INTERNET = "Periksa Koneksi Anda";
+    public static final String MENGIRIM_DATA = "Mengirim data...";
 
     public static final String ID = "id";
     public static final String NAMA_ORGANISASI = "nama_organisasi";
@@ -30,7 +31,11 @@ public final class Config {
     public static final String CREATED_AT = "created_at";
     public static final String UPDATED_AT = "updated_at";
 
-
     public static final String COUNT_DATA_TABLE_ANGGOTA = "count_data_table_anggota";
     public static final String COUNT_DATA_TABLE_PEMAKAIAN_RUANG = "count_data_table_pemakaian_ruang";
+
+
+    public static final String BUNDLE_TYPE_DAFTAR_PENGURUS = "bundle_type_daftar_pengurus";
+
+    public static final String PATH_IMAGE = "path_image";
 }
