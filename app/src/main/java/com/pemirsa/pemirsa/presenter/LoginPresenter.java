@@ -22,7 +22,6 @@ public class LoginPresenter {
     private ApiServiceServer apiServiceServer;
     private ClientServer clientServer;
     private ArrayList<LoginModel> loginModel = new ArrayList<>();
-    private ArrayList<CountDataModel> countDatumModels = new ArrayList<>();
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editorl;
 
@@ -57,61 +56,36 @@ public class LoginPresenter {
                         final String created_at = loginModel.get(i).getUpdatedAt();
                         final String updated_at = loginModel.get(i).getUpdatedAt();
 
-                        ApiServiceServer apiServiceServerData = ClientServer.getInstanceRetrofit();
-                        apiServiceServerData.getDataCount(id).enqueue(new Callback<ArrayList<CountDataModel>>() {
-                            @Override
-                            public void onResponse(Call<ArrayList<CountDataModel>> call, Response<ArrayList<CountDataModel>> response) {
-                                if (response.isSuccessful()){
-                                    countDatumModels = response.body();
-                                    for (int j = 0; j < countDatumModels.size(); j++) {
-                                        final String count_data_table_anggota = countDatumModels.get(j).getCountDataTableAnggota();
-                                        final String count_data_table_pemakaian_ruang = countDatumModels.get(j).getCountDataTablePemakaianRuang();
+                        sharedPreferences = context.getSharedPreferences(Config.SHARED_PRED_NAME,Context.MODE_PRIVATE);
+                        editorl =sharedPreferences.edit();
 
+                        editorl.putString(Config.ID,id);
+                        editorl.putString(Config.NAMA_ORGANISASI,nama_organisasi);
+                        editorl.putString(Config.JENIS_ORGANISASI,jenis_organisasi);
+                        editorl.putString(Config.EMAIL,email);
+                        editorl.putString(Config.NAMA_KETUA,nama_ketua);
+                        editorl.putString(Config.NAMA_WAKIL_KETUA,nama_wakil_ketua);
+                        editorl.putString(Config.NAMA_SEKRETARIS,nama_sekretaris);
+                        editorl.putString(Config.NO_HP_KETUA,no_hp_ketua);
+                        editorl.putString(Config.NO_HP_SEKRETARIS,no_hp_sekretaris);
+                        editorl.putString(Config.NAMA_BENDAHARA,nama_bendahara);
+                        editorl.putString(Config.URL_WEBSITE,url_website);
+                        editorl.putString(Config.JUMLAH_ANGGOTA,jumlah_anggota);
+                        editorl.putString(Config.URL_STRUK_ORGANISASI,url_struk_organisasi);
+                        editorl.putString(Config.URL_LOGO_ORGANISASI,url_logo_organisasi);
+                        editorl.putString(Config.STATUS_ORGANISASI,status_organisasi);
+                        editorl.putString(Config.STATUS_APLIKASI,status_aplikasi);
+                        editorl.putString(Config.DESKRIPSI_ORGANISASI,deskripsi_organisasi);
+                        editorl.putString(Config.TOKEN_FIREBASE,token_firebase);
+                        editorl.putString(Config.HARDWARE_ID,hardware_id);
+                        editorl.putString(Config.USERNAME,username);
+                        editorl.putString(Config.PASSWORD,created_at);
+                        editorl.putString(Config.CREATED_AT,updated_at);
 
-                                        sharedPreferences = context.getSharedPreferences(Config.SHARED_PRED_NAME,Context.MODE_PRIVATE);
-                                        editorl =sharedPreferences.edit();
+                        editorl.apply();
 
-                                        editorl.putString(Config.ID,id);
-                                        editorl.putString(Config.NAMA_ORGANISASI,nama_organisasi);
-                                        editorl.putString(Config.JENIS_ORGANISASI,jenis_organisasi);
-                                        editorl.putString(Config.EMAIL,email);
-                                        editorl.putString(Config.NAMA_KETUA,nama_ketua);
-                                        editorl.putString(Config.NAMA_WAKIL_KETUA,nama_wakil_ketua);
-                                        editorl.putString(Config.NAMA_SEKRETARIS,nama_sekretaris);
-                                        editorl.putString(Config.NO_HP_KETUA,no_hp_ketua);
-                                        editorl.putString(Config.NO_HP_SEKRETARIS,no_hp_sekretaris);
-                                        editorl.putString(Config.NAMA_BENDAHARA,nama_bendahara);
-                                        editorl.putString(Config.URL_WEBSITE,url_website);
-                                        editorl.putString(Config.JUMLAH_ANGGOTA,jumlah_anggota);
-                                        editorl.putString(Config.URL_STRUK_ORGANISASI,url_struk_organisasi);
-                                        editorl.putString(Config.URL_LOGO_ORGANISASI,url_logo_organisasi);
-                                        editorl.putString(Config.STATUS_ORGANISASI,status_organisasi);
-                                        editorl.putString(Config.STATUS_APLIKASI,status_aplikasi);
-                                        editorl.putString(Config.DESKRIPSI_ORGANISASI,deskripsi_organisasi);
-                                        editorl.putString(Config.TOKEN_FIREBASE,token_firebase);
-                                        editorl.putString(Config.HARDWARE_ID,hardware_id);
-                                        editorl.putString(Config.USERNAME,username);
-                                        editorl.putString(Config.PASSWORD,created_at);
-                                        editorl.putString(Config.CREATED_AT,updated_at);
-                                        editorl.putString(Config.COUNT_DATA_TABLE_ANGGOTA,count_data_table_anggota);
-                                        editorl.putString(Config.COUNT_DATA_TABLE_PEMAKAIAN_RUANG,count_data_table_pemakaian_ruang);
-
-                                        editorl.apply();
-
-                                        Toast.makeText(context, "Login Berhasil", Toast.LENGTH_SHORT).show();
-                                        context.startActivity(new Intent(context, HomeActivity.class));
-                                    }
-                                }
-                                else {
-                                    Toast.makeText(context, "Login Gagal", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<ArrayList<CountDataModel>> call, Throwable t) {
-                                Toast.makeText(context, Config.ERROR_INTERNET + "Count " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        Toast.makeText(context, "Login Berhasil", Toast.LENGTH_SHORT).show();
+                        context.startActivity(new Intent(context, HomeActivity.class));
 
                     }
                 }

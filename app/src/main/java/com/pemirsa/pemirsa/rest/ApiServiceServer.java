@@ -31,9 +31,9 @@ public interface ApiServiceServer {
     @GET("anggota/{id}")
     Call<ArrayList<AnggotaModel>> getDataAnggotaId(@Path("id") String id);
 
-    @GET("anggota/prodi/{prodi}/{status_anggota}")
-    Call<ArrayList<AnggotaModel>> getDataAnggotaAllProdidanStatusAnggota(@Path("prodi") String prodi,
-                                                                         @Path("status_anggota") String status);
+    @GET("anggota/prodi/{organisasi_anggota}/{status_anggota}")
+    Call<ArrayList<AnggotaModel>> getDataAnggotaAllOrganisasidanStatusAnggota(@Path("organisasi_anggota") String prodi,
+                                                                              @Path("status_anggota") String status);
     @GET("listdaftarpengurus/{type}")
     Call<ArrayList<ListDaftarPengurusModel>> getDataListDaftarPengurus(@Path("type") String id);
 
@@ -45,16 +45,20 @@ public interface ApiServiceServer {
     Call<ArrayList<ErrorMsgModel>> postDataPengurus(@Field("id_user") String id_user,
                                                     @Field("nama_anggota") String nama_anggota,
                                                     @Field("nim_anggota") String nim_anggota,
+                                                    @Field("organisasi_anggota") String organisasi_anggota,
                                                     @Field("prodi_anggota") String prodi_anggota,
                                                     @Field("email_anggota") String email_anggota,
                                                     @Field("jabatan_anggota") String jabatan_anggota,
                                                     @Field("no_hp_anggota") String no_hp_anggota,
                                                     @Field("url_foto_ktm_anggota") String url_foto_ktm_anggota,
                                                     @Field("url_foto_anggota") String url_foto_anggota,
-                                                    @Field("status_anggota") String status_anggota);
+                                                    @Field("status_anggota") String status_anggota,
+                                                    @Field("token_anggota") String token_anggota
+                                                    );
     @FormUrlEncoded
     @POST("daftarruangan")
-    Call<ArrayList<ErrorMsgModel>> postDataPenggunaanRuangan(@Field("id_user") String id_user,
+    Call<ArrayList<ErrorMsgModel>> postDataPenggunaanRuangan(
+                                                        @Field("id_user") String id_user,
                                                         @Field("id_anggota") String id_anggota,
                                                         @Field("nama_daftar_ruangan") String nama_daftar_ruangan,
                                                         @Field("nama_acara") String nama_acara,
@@ -70,6 +74,7 @@ public interface ApiServiceServer {
                                                         @Field("url_foto_pj") String url_foto_pj,
                                                         @Field("status_daftar_ruangan") String status_daftar_ruangan,
                                                         @Field("token_daftar_ruangan") String token_daftar_ruangan);
+
 
     @GET("getLatLong.php")
     Call<ResponseBody> getTps();

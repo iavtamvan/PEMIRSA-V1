@@ -1,6 +1,8 @@
 package com.pemirsa.pemirsa.presenter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +24,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class DaftarPenggunaanRuanganPresenter {
     private ApiServiceServer apiServiceServer;
     private ArrayList<ErrorMsgModel> errorMsgModels = new ArrayList<>();
@@ -32,6 +36,9 @@ public class DaftarPenggunaanRuanganPresenter {
     private List<String> dataAnggota = new ArrayList<>();
     private ArrayAdapter<String> arrayAdapterRuangan;
     private ArrayAdapter<String> arrayAdapterAnggota;
+    private String idAnggota;
+    private String urlFotoPj;
+    private String namAnggota;
 
 
     public void sendDataPenggunaanRuangan(final Context context, String id_user, String id_anggota, String nama_daftar_ruangan, String nama_acara, String deskripsi_acara, String tgl_mulai_daftar_ruangan, String tgl_selesai_daftar_ruangan, String jam_mulai_daftar_ruangan, String jam_selesai_daftar_ruangan, String nama_organisasi_daftar_ruangan, String pj_daftar_ruangan, String jumlah_peserta_daftar_ruangan, String url_file_daftar_ruangan, String url_foto_pj, String status_daftar_ruangan, String token_daftar_ruangan){
@@ -44,7 +51,7 @@ public class DaftarPenggunaanRuanganPresenter {
                         if (response.isSuccessful()){
                             Toast.makeText(context, "" + Config.DATA_BERHASIL_DISIMPAN, Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(context, "" + Config.DATA_GAGAL_DISIMPAN, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, ""+ response.message() , Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -67,6 +74,8 @@ public class DaftarPenggunaanRuanganPresenter {
                                 dataRuangan.add(listRuanganModels.get(i).getNamaRuangan());
                                 arrayAdapterRuangan = new ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, dataRuangan);
                                 spinner.setAdapter(arrayAdapterRuangan);
+
+
                             }
                         } else {
                             Toast.makeText(context, "" + Config.DATA_KOSONG, Toast.LENGTH_SHORT).show();
@@ -82,16 +91,41 @@ public class DaftarPenggunaanRuanganPresenter {
 
     public void spinnerListAnggota(final Context context, final Spinner spinner, String prodi){
         apiServiceServer = ClientServer.getInstanceRetrofit();
-        apiServiceServer.getDataAnggotaAllProdidanStatusAnggota(prodi, "Aktif")
+        apiServiceServer.getDataAnggotaAllOrganisasidanStatusAnggota(prodi, "Aktif")
                 .enqueue(new Callback<ArrayList<AnggotaModel>>() {
                     @Override
                     public void onResponse(Call<ArrayList<AnggotaModel>> call, Response<ArrayList<AnggotaModel>> response) {
                         anggotaModels = response.body();
                         if (response.isSuccessful()){
                             for (int i = 0; i < anggotaModels.size(); i++) {
-                                dataAnggota.add(anggotaModels.get(i).getNamaAnggota() + " " + anggotaModels.get(i).getNimAnggota());
+                                dataAnggota.add(anggotaModels.get(i).getNamaAnggota());
                                 arrayAdapterAnggota = new ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, dataAnggota);
                                 spinner.setAdapter(arrayAdapterAnggota);
+                                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        namAnggota = spinner.getSelectedItem().toString().trim();
+                                        Toast.makeText(context, "" + namAnggota, Toast.LENGTH_SHORT).show();
+                                        for (AnggotaModel s : anggotaModels) {
+                                            if (s.getNamaAnggota() != null && s.getNamaAnggota().contains(namAnggota)) {
+                                                idAnggota = s.getId();
+                                                urlFotoPj = s.getUrlFotoAnggota();
+                                                Log.d(TAG, "idAnggotta : " + idAnggota);
+                                                SharedPreferences sharedPreferences = context.getSharedPreferences(Config.SHARED_PRED_NAME, Context.MODE_PRIVATE);
+                                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                editor.putString(Config.IDANGGOTA, idAnggota);
+                                                editor.putString(Config.URLFOTOPJ, urlFotoPj);
+                                                editor.apply();
+
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+                                        Toast.makeText(context, "Galat", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         } else {
                             Toast.makeText(context, "" + Config.DATA_KOSONG, Toast.LENGTH_SHORT).show();

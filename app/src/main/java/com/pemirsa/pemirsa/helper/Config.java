@@ -39,6 +39,11 @@ public final class Config {
     public static final String CREATED_AT = "created_at";
     public static final String UPDATED_AT = "updated_at";
 
+
+
+    public static final String IDANGGOTA = "idAnggota";
+    public static final String URLFOTOPJ = "urlFotoPj";
+
     public static final String COUNT_DATA_TABLE_ANGGOTA = "count_data_table_anggota";
     public static final String COUNT_DATA_TABLE_PEMAKAIAN_RUANG = "count_data_table_pemakaian_ruang";
 
@@ -46,6 +51,7 @@ public final class Config {
     public static final String BUNDLE_TYPE_DAFTAR_PENGURUS = "bundle_type_daftar_pengurus";
 
     public static final String PATH_IMAGE = "path_image";
+    public static final String PATH_FILE_PROPOSAL = "path_file_proposal";
 
 
     public static final String DATE_PICKER_FRAGMENT_DIALOG = "DatePickerFragmentDialog";

@@ -106,6 +106,7 @@ public class HomeFragment extends Fragment {
         anggotaModels = new ArrayList<>();
         homeAdapter = new HomeAdapter(getActivity(), anggotaModels);
         homePresenter.getDataAnggota(getActivity(), id, rvDaftarPengurus);
+        homePresenter.countData(getActivity(), id, tvJumlahAnggota, tvJumlahPemakaianRuangan);
         rvDaftarPengurus.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         rvDaftarPengurus.setAdapter(homeAdapter);
 
@@ -166,9 +167,9 @@ public class HomeFragment extends Fragment {
         tvNamaKetuaOrganisasi.setText(nama_ketua);
         tvNamaWakilKetuaOrganisasi.setText(nama_wakil_ketua);
         btnStatusApps.setText(status_organisasi); //enaknya dibikin status organisasi atau aplikasi yah?
-        tvJumlahAnggota.setText(count_data_table_anggota + " Anggota"); // null
+//        tvJumlahAnggota.setText(count_data_table_anggota + " Anggota"); // null
         tvJumlahPh.setText(null); // null
-        tvJumlahPemakaianRuangan.setText(count_data_table_pemakaian_ruang + " Booking");
+//        tvJumlahPemakaianRuangan.setText(count_data_table_pemakaian_ruang + " Booking");
         tvInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

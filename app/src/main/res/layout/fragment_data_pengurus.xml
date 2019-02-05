@@ -39,6 +39,20 @@
                     android:inputType="textCapCharacters"
                     android:hint="NIM Pengurus"/>
             </android.support.design.widget.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Prganisasi"
+                android:textColor="@android:color/black"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Organisasi"
+                android:id="@+id/tv_nama_organisasi"
+                android:textColor="@color/colorAbuAbuGelap"
+                android:textSize="13dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

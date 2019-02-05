@@ -26,7 +26,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nama Acara"
-                    android:inputType="textCapCharacters" />
+                    android:inputType="textCapCharacters"
+                    android:text="Seminar" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -37,7 +38,8 @@
                     android:id="@+id/edt_nama_deskripsi_acara"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Deskripsi Acara" />
+                    android:hint="Deskripsi Acara"
+                    android:text="Seminar Nas On" />
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
@@ -55,11 +57,11 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_tanggal_mulai_daftar_ruangan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Ketuk Untuk Menentukan Tanggal"
                     android:textColor="@color/colorAbuAbuGelap"
-                    android:id="@+id/tv_tanggal_mulai_daftar_ruangan"
                     android:textSize="12dp" />
             </LinearLayout>
 
@@ -72,17 +74,17 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tanggal Mulai"
+                    android:text="Tanggal Selesai"
                     android:textColor="@android:color/black"
                     android:textSize="14dp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_tanggal_selesai_daftar_ruangan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Ketuk Untuk Menentukan Tanggal"
                     android:textColor="@color/colorAbuAbuGelap"
-                    android:id="@+id/tv_tanggal_selesai_daftar_ruangan"
                     android:textSize="12dp" />
             </LinearLayout>
 
@@ -101,11 +103,11 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_jam_mulai_daftar_ruangan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Ketuk Untuk Menentukan Jam"
                     android:textColor="@color/colorAbuAbuGelap"
-                    android:id="@+id/tv_jam_mulai_daftar_ruangan"
                     android:textSize="12dp" />
             </LinearLayout>
 
@@ -124,10 +126,10 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_jam_selesai_daftar_ruangan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Ketuk Untuk Menentukan Jam"
-                    android:id="@+id/tv_jam_selesai_daftar_ruangan"
                     android:textColor="@color/colorAbuAbuGelap"
                     android:textSize="12dp" />
             </LinearLayout>
@@ -147,11 +149,11 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_nama_organisasi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nama Organisasi"
                     android:textColor="@color/colorAbuAbuGelap"
-                    android:id="@+id/tv_nama_organisasi"
                     android:textSize="13dp" />
             </LinearLayout>
 
@@ -204,7 +206,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Jumlah Peserta"
-                    android:inputType="textCapCharacters" />
+                    android:inputType="number"
+                    android:text="30" />
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
@@ -215,8 +218,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -227,10 +230,10 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_name_file"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Nama File"
-                        android:id="@+id/tv_name_file"
                         android:textColor="@color/colorAbuAbuGelap"
                         android:textSize="12dp" />
                 </LinearLayout>
@@ -239,17 +242,18 @@
                     android:id="@+id/btn_pilih_file_proposal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="right"
                     android:background="@drawable/btn_bg_aktif"
                     android:text="Pilih File"
-                    android:layout_gravity="right"
                     android:textColor="@android:color/white" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorAbuAbuGelap"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"/>
+                android:layout_marginBottom="4dp"
+                android:background="@color/colorAbuAbuGelap" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -265,15 +269,14 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_token_penggunaan_ruangan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Token Booking"
                     android:textColor="@android:color/holo_red_dark"
-                    android:id="@+id/tv_token_penggunaan_ruangan"
-                    android:textStyle="italic"
-                    android:textSize="13dp" />
+                    android:textSize="13dp"
+                    android:textStyle="italic" />
             </LinearLayout>
-
 
 
         </LinearLayout>
@@ -283,10 +286,10 @@
         android:id="@+id/btn_kirim_penggunaan_ruangan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:background="@drawable/btn_bg_submit"
         android:text="Kirim"
         android:textColor="@android:color/white"
-        android:textSize="20dp"
-        android:layout_marginTop="4dp"/>
+        android:textSize="20dp" />
 
 </LinearLayout>

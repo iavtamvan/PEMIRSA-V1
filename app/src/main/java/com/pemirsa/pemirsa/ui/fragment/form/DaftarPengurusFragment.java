@@ -3,19 +3,17 @@ package com.pemirsa.pemirsa.ui.fragment.form;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
@@ -29,24 +27,24 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.obsez.android.lib.filechooser.ChooserDialog;
+import com.obsez.android.lib.filechooser.tool.DirAdapter;
 import com.pemirsa.pemirsa.R;
 import com.pemirsa.pemirsa.helper.Config;
+import com.pemirsa.pemirsa.helper.ImageUtil;
 import com.pemirsa.pemirsa.model.ErrorMsgModel;
 import com.pemirsa.pemirsa.model.Result;
 import com.pemirsa.pemirsa.presenter.DaftarPengurusPresenter;
 import com.pemirsa.pemirsa.presenter.ListDaftarPengurusPresenter;
 import com.pemirsa.pemirsa.rest.ApiServiceServer;
 import com.pemirsa.pemirsa.rest.uploadImage.RetroClient;
-import com.pemirsa.pemirsa.ui.activity.ListDaftarPengurusActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.UUID;
 
 import okhttp3.MediaType;
@@ -57,7 +55,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.content.ContentValues.TAG;
-import static android.support.v4.provider.FontsContractCompat.FontRequestCallback.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,7 +65,7 @@ public class DaftarPengurusFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
-    private String id_user, urlFotoKtm, UrlFotoAnggota, prodi, jabatan, statusPengurus;
+    private String id_user, urlFotoKtm, urlFotoAnggota, prodi, jabatan, statusPengurus;
     private ListDaftarPengurusPresenter listDaftarPengurusPresenter;
     private TextInputEditText edtNamaPengurus;
     private TextInputEditText edtNimPengurus;
@@ -89,8 +86,9 @@ public class DaftarPengurusFragment extends Fragment {
 
     private static final int CAMERA_REQUEST = 1888;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
-    private int PICK_IMAGE_REQUEST = 1000;
-    private String fname, imagePath, imagePathServer;
+    private String fname, imagePath, imagePathFoto, path, token_anggota;
+    private String namaOrganisasi;
+    private TextView tvNamaOrganisasi;
 
 
     public DaftarPengurusFragment() {
@@ -108,7 +106,10 @@ public class DaftarPengurusFragment extends Fragment {
         sharedPreferences = getActivity().getSharedPreferences(Config.SHARED_PRED_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         id_user = sharedPreferences.getString(Config.ID, "");
-        Toast.makeText(getActivity(), "" + id_user, Toast.LENGTH_SHORT).show();
+        namaOrganisasi = sharedPreferences.getString(Config.NAMA_ORGANISASI, "");
+        tvNamaOrganisasi.setText(namaOrganisasi);
+
+        token_anggota = namaOrganisasi + "-" + id_user + "/" +UUID.randomUUID().toString() + "-PEMIRSA";
 
         errorMsgModels = new ArrayList<>();
         daftarPengurusPresenter = new DaftarPengurusPresenter();
@@ -156,7 +157,7 @@ public class DaftarPengurusFragment extends Fragment {
         btnKirimDataPengurus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadImage();
+                uploadImageKTM();
             }
         });
 
@@ -179,12 +180,35 @@ public class DaftarPengurusFragment extends Fragment {
         btnPilihFotoPengurus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-// Show only images, no videos or anything else
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-// Always show the chooser (if there are multiple options available)
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+                new ChooserDialog(getActivity())
+                        .disableTitle(true)
+                        .withStartFile(path)
+                        .withResources(R.string.app_name, R.string.title_choose, R.string.dialog_cancel)
+//                        .withFileIconsRes(false, R.mipmap.ic_my_file, R.mipmap.ic_my_folder)
+                        .withAdapterSetter(new ChooserDialog.AdapterSetter() {
+                            @Override
+                            public void apply(DirAdapter adapter) {
+                                //
+                            }
+                        })
+                        .withChosenListener(new ChooserDialog.Result() {
+                            @Override
+                            public void onChoosePath(String path, File pathFile) {
+                                Toast.makeText(getActivity(), "FILE: " + path, Toast.LENGTH_SHORT).show();
+
+                                imagePathFoto = path;
+                                //_iv.setImageURI(Uri.fromFile(pathFile));
+                                ivFotoPengurus.setImageBitmap(ImageUtil.decodeFile(pathFile));
+                            }
+                        })
+                        .withOnBackPressedListener(new ChooserDialog.OnBackPressedListener() {
+                            @Override
+                            public void onBackPressed(AlertDialog dialog) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .build()
+                        .show();
             }
         });
 
@@ -199,7 +223,7 @@ public class DaftarPengurusFragment extends Fragment {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(getActivity(), "camera permission granted", Toast.LENGTH_LONG).show();
                 Intent cameraIntent = new
-                        Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                        Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
             } else {
                 Toast.makeText(getActivity(), "camera permission denied", Toast.LENGTH_LONG).show();
@@ -307,9 +331,9 @@ public class DaftarPengurusFragment extends Fragment {
 //    }
 
     // upload mulai Image
-    private void uploadImage() {
+    private void uploadImageKTM() {
 
-        final ProgressDialog p = ProgressDialog.show(getActivity(), "Loading", Config.MENGIRIM_DATA, false, false);
+        final ProgressDialog p = ProgressDialog.show(getActivity(), "Loading ", Config.MENGIRIM_DATA, false, false);
 
 
         ApiServiceServer s = RetroClient.getService();
@@ -328,17 +352,10 @@ public class DaftarPengurusFragment extends Fragment {
                 if (response.isSuccessful()) {
                     if (response.body().getResult().equals("success")) {
                         Toast.makeText(getActivity(), "Sukses", Toast.LENGTH_SHORT).show();
-                        editor.putString(Config.PATH_IMAGE, "http://indiku.id/image/upload_client/" + f.getName());
+//                        editor.putString(Config.PATH_IMAGE, "http://indiku.id/image/upload_client/" + f.getName());
                         urlFotoKtm = "http://indiku.id/image/upload_client/" + f.getName();
-                        editor.apply();
-                        daftarPengurusPresenter.kirimDataPengurus(getActivity(), id_user, edtNamaPengurus.getText().toString().trim(), edtNimPengurus.getText().toString().trim(),
-                                prodi.trim(), edtEmailPengurus.getText().toString().trim(), jabatan.trim(),
-                                edtNohpPengurus.getText().toString().trim(), urlFotoKtm, UrlFotoAnggota, statusPengurus.trim());
-                        Log.d(TAG, "onResponseImage: " + urlFotoKtm);
-                        edtNamaPengurus.setText("");
-                        edtNimPengurus.setText("");
-                        edtEmailPengurus.setText("");
-                        edtNohpPengurus.setText("");
+//                        editor.apply();
+                        uploadImageFotoPengurus(p);
 
                     } else {
                         Toast.makeText(getActivity(), "Gagal else", Toast.LENGTH_SHORT).show();
@@ -362,7 +379,55 @@ public class DaftarPengurusFragment extends Fragment {
         });
     }
 
+    private void uploadImageFotoPengurus(final ProgressDialog p) {
 
+        ApiServiceServer s = RetroClient.getService();
+
+        final File f = new File(imagePathFoto);
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), f);
+
+        MultipartBody.Part part = MultipartBody.Part.createFormData("uploaded_file", f.toString(), requestFile);
+        Call<Result> resultCAll = s.postIMmage(part);
+        resultCAll.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+
+                p.dismiss();
+                if (response.isSuccessful()) {
+                    if (response.body().getResult().equals("success")) {
+                        Toast.makeText(getActivity(), "Sukses", Toast.LENGTH_SHORT).show();
+//                        editor.putString(Config.PATH_IMAGE, "http://indiku.id/image/upload_client/" + f.getName());
+                        urlFotoAnggota = "http://indiku.id/image/upload_client/" + f.getName();
+//                        editor.apply();
+                        daftarPengurusPresenter.kirimDataPengurus(getActivity(), id_user, edtNamaPengurus.getText().toString().trim(), edtNimPengurus.getText().toString().trim(),
+                                tvNamaOrganisasi.getText().toString().trim(), prodi.trim(),  edtEmailPengurus.getText().toString().trim(), jabatan.trim(),
+                                edtNohpPengurus.getText().toString().trim(), urlFotoKtm, urlFotoAnggota, statusPengurus.trim(), token_anggota);
+                        Log.d(TAG, "onResponseImage: " + urlFotoKtm);
+                        edtNamaPengurus.setText("");
+                        edtNimPengurus.setText("");
+                        edtEmailPengurus.setText("");
+                        edtNohpPengurus.setText("");
+
+                    } else {
+                        Toast.makeText(getActivity(), "Gagal else", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "Gagal not fuull", Toast.LENGTH_SHORT).show();
+                }
+
+                imagePath = "";
+//                imageVi.setVisibility(View.INVISIBLE);
+
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+                Toast.makeText(getActivity(), "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                p.dismiss();
+            }
+        });
+    }
     // upload selesai Image
     private void initView(View view) {
         edtNamaPengurus = view.findViewById(R.id.edt_nama_pengurus);
@@ -380,5 +445,6 @@ public class DaftarPengurusFragment extends Fragment {
         divStatusPengurus = view.findViewById(R.id.div_status_pengurus);
         spnStatusPengurus = view.findViewById(R.id.spn_status_pengurus);
         btnKirimDataPengurus = view.findViewById(R.id.btn_kirim_data_pengurus);
+        tvNamaOrganisasi = view.findViewById(R.id.tv_nama_organisasi);
     }
 }
