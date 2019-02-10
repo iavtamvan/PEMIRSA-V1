@@ -4,21 +4,15 @@ package com.pemirsa.pemirsa.ui.fragment.form;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.OpenableColumns;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
@@ -32,14 +26,13 @@ import com.pemirsa.pemirsa.R;
 import com.pemirsa.pemirsa.helper.Config;
 import com.pemirsa.pemirsa.model.AnggotaModel;
 import com.pemirsa.pemirsa.model.Result;
-import com.pemirsa.pemirsa.presenter.DaftarPenggunaanRuanganPresenter;
+import com.pemirsa.pemirsa.presenter.PenggunaanRuanganPresenter;
 import com.pemirsa.pemirsa.rest.ApiServiceServer;
 import com.pemirsa.pemirsa.rest.uploadImage.RetroClient;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Random;
 import java.util.UUID;
 
 import okhttp3.MediaType;
@@ -49,10 +42,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.app.Activity.RESULT_OK;
 import static android.support.constraint.Constraints.TAG;
-import static com.pemirsa.pemirsa.helper.Config.getDateAndTime;
-import static com.pemirsa.pemirsa.helper.Config.getTimeOnly;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,7 +72,7 @@ public class DaftarPenggunaanRuanganFragment extends Fragment {
     private TextView tvTokenPenggunaanRuangan;
     private Button btnKirimPenggunaanRuangan;
 
-    private DaftarPenggunaanRuanganPresenter daftarPenggunaanRuanganPresenter;
+    private PenggunaanRuanganPresenter penggunaanRuanganPresenter;
     private ArrayList<AnggotaModel> anggotaModels = new ArrayList<>();
     private String prodi, idAnggota, idUser, urlFotoPj;
 
@@ -123,9 +113,9 @@ public class DaftarPenggunaanRuanganFragment extends Fragment {
         tvTokenPenggunaanRuangan.setText("PEMIRSA-" +UUID.randomUUID().toString());
         tvNamaOrganisasi.setText(prodi);
 
-        daftarPenggunaanRuanganPresenter = new DaftarPenggunaanRuanganPresenter();
-        daftarPenggunaanRuanganPresenter.spinnerListAnggota(getActivity(), spnPenanggungJawabRuangan, prodi);
-        daftarPenggunaanRuanganPresenter.spinnerListRuangan(getActivity(), spnNamaRuangan);
+        penggunaanRuanganPresenter = new PenggunaanRuanganPresenter();
+        penggunaanRuanganPresenter.spinnerListAnggota(getActivity(), spnPenanggungJawabRuangan, prodi);
+        penggunaanRuanganPresenter.spinnerListRuangan(getActivity(), spnNamaRuangan);
 
         btnKirimPenggunaanRuangan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -277,7 +267,7 @@ public class DaftarPenggunaanRuanganFragment extends Fragment {
                         urlFileProposal = "http://indiku.id/image/upload_client/" + f.getName();
                         editor.apply();
 
-                        daftarPenggunaanRuanganPresenter.sendDataPenggunaanRuangan(getActivity(), idUser,idAnggota,spnNamaRuangan.getSelectedItem().toString().trim()
+                        penggunaanRuanganPresenter.sendDataPenggunaanRuangan(getActivity(), idUser,idAnggota,spnNamaRuangan.getSelectedItem().toString().trim()
                                 ,edtNamaAcara.getText().toString().trim(),edtNamaAcara.getText().toString().trim(),tvTanggalMulaiDaftarRuangan.getText().toString().trim(),
                                 tvTanggalSelesaiDaftarRuangan.getText().toString().trim(),tvJamMulaiDaftarRuangan.getText().toString().trim(),
                                 tvJamSelesaiDaftarRuangan.getText().toString().trim(), tvNamaOrganisasi.getText().toString().trim(),

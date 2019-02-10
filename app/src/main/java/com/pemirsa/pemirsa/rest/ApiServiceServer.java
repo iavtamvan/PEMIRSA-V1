@@ -7,6 +7,7 @@ import com.pemirsa.pemirsa.model.ListDaftarPengurusModel;
 import com.pemirsa.pemirsa.model.ListRuanganModel;
 import com.pemirsa.pemirsa.model.LoginModel;
 import com.pemirsa.pemirsa.model.Result;
+import com.pemirsa.pemirsa.model.RiwayatDaftarRuanganModel;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public interface ApiServiceServer {
     @GET("anggota/{id}")
     Call<ArrayList<AnggotaModel>> getDataAnggotaId(@Path("id") String id);
 
-    @GET("anggota/prodi/{organisasi_anggota}/{status_anggota}")
+    @GET("anggota/organisasi/{organisasi_anggota}/{status_anggota}")
     Call<ArrayList<AnggotaModel>> getDataAnggotaAllOrganisasidanStatusAnggota(@Path("organisasi_anggota") String prodi,
                                                                               @Path("status_anggota") String status);
     @GET("listdaftarpengurus/{type}")
@@ -39,6 +40,9 @@ public interface ApiServiceServer {
 
     @GET("listruangan/status/{status_ruangan}")
     Call<ArrayList<ListRuanganModel>> getDataListRuangan(@Path("status_ruangan") String status);
+
+    @GET("daftarruangan/riwayat/{id_user}")
+    Call<ArrayList<RiwayatDaftarRuanganModel>> getRiwayatDaftarRuangan(@Path("id_user") String id);
 
     @FormUrlEncoded
     @POST("anggota")

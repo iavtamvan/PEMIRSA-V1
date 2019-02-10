@@ -1,13 +1,12 @@
 package com.pemirsa.pemirsa.presenter;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pemirsa.pemirsa.adapter.HomeAdapter;
+import com.pemirsa.pemirsa.adapter.HomeListPengurusHorizontalAdapter;
 import com.pemirsa.pemirsa.helper.Config;
 import com.pemirsa.pemirsa.model.AnggotaModel;
 import com.pemirsa.pemirsa.model.CountDataModel;
@@ -25,7 +24,7 @@ public class HomePresenter {
     private ClientServer clientServer;
     private ArrayList<AnggotaModel> anggotaModels = new ArrayList<>();
     private ArrayList<CountDataModel> countDatumModels = new ArrayList<>();
-    private HomeAdapter homeAdapter;
+    private HomeListPengurusHorizontalAdapter homeListPengurusHorizontalAdapter;
 
     public void getDataAnggota(final Context context, String id, final RecyclerView rvHome){
         apiServiceServer = ClientServer.getInstanceRetrofit();
@@ -34,9 +33,9 @@ public class HomePresenter {
             public void onResponse(Call<ArrayList<AnggotaModel>> call, Response<ArrayList<AnggotaModel>> response) {
                 if (response.isSuccessful()){
                     anggotaModels = response.body();
-                    homeAdapter = new HomeAdapter(context, anggotaModels);
+                    homeListPengurusHorizontalAdapter = new HomeListPengurusHorizontalAdapter(context, anggotaModels);
                     rvHome.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-                    rvHome.setAdapter(homeAdapter);
+                    rvHome.setAdapter(homeListPengurusHorizontalAdapter);
                 }
             }
 

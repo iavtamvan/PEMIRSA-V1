@@ -16,11 +16,11 @@ import com.pemirsa.pemirsa.model.AnggotaModel;
 
 import java.util.ArrayList;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
+public class HomeListPengurusHorizontalAdapter extends RecyclerView.Adapter<HomeListPengurusHorizontalAdapter.ViewHolder> {
     private Context context;
     private ArrayList<AnggotaModel> anggotaModels;
 
-    public HomeAdapter(Context context, ArrayList<AnggotaModel> anggotaModels) {
+    public HomeListPengurusHorizontalAdapter(Context context, ArrayList<AnggotaModel> anggotaModels) {
         this.context = context;
         this.anggotaModels = anggotaModels;
     }
@@ -28,7 +28,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.list_anggota_horizontal, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.list_pengurus_horizontal, viewGroup, false);
         return new ViewHolder(view);
     }
 

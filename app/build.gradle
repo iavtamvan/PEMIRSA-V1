@@ -48,8 +48,10 @@ dependencies {
 
     implementation 'pub.devrel:easypermissions:2.0.1'
 
-//    implementation 'com.obsez.android.lib.filechooser:filechooser:v1.1.11'
     implementation 'com.github.hedzr:android-file-chooser:master-SNAPSHOT'
+
+    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 
 
 }

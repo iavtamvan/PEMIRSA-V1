@@ -14,6 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.pemirsa.pemirsa.ui.fragment.data.ListPengurusFragment;
+import com.pemirsa.pemirsa.ui.fragment.data.RiwayatPenggunaanRuanganFragment;
 import com.pemirsa.pemirsa.ui.fragment.form.DaftarPenggunaanRuanganFragment;
 import com.pemirsa.pemirsa.ui.fragment.form.DaftarPengurusFragment;
 import com.pemirsa.pemirsa.ui.fragment.HomeFragment;
@@ -109,9 +112,15 @@ public class HomeActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.containerViewPager, new DaftarPenggunaanRuanganFragment()).commit();
             getSupportActionBar().setTitle("Daftar Penggunaan Ruangan");
         } else if (id == R.id.nav_data_pengurus) {
-
+            fab.setVisibility(View.GONE);
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.containerViewPager, new ListPengurusFragment()).commit();
+            getSupportActionBar().setTitle("Data Pengurus");
         } else if (id == R.id.nav_data_penggunaan_ruangan) {
-
+            fab.setVisibility(View.GONE);
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.containerViewPager, new RiwayatPenggunaanRuanganFragment()).commit();
+            getSupportActionBar().setTitle("Riwayat P.Ruangan");
         } else if (id == R.id.nav_data_cek_penggunaan_ruangan) {
 
         } else if (id == R.id.nav_profil) {

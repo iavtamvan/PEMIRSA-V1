@@ -21,7 +21,7 @@ import com.bumptech.glide.Glide;
 import com.ethanhua.skeleton.Skeleton;
 import com.ethanhua.skeleton.ViewSkeletonScreen;
 import com.pemirsa.pemirsa.R;
-import com.pemirsa.pemirsa.adapter.HomeAdapter;
+import com.pemirsa.pemirsa.adapter.HomeListPengurusHorizontalAdapter;
 import com.pemirsa.pemirsa.helper.Config;
 import com.pemirsa.pemirsa.model.AnggotaModel;
 import com.pemirsa.pemirsa.presenter.HomePresenter;
@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
     private String count_data_table_pemakaian_ruang;
 
     private HomePresenter homePresenter;
-    private HomeAdapter homeAdapter;
+    private HomeListPengurusHorizontalAdapter homeListPengurusHorizontalAdapter;
     private ArrayList<AnggotaModel> anggotaModels;
     private ViewSkeletonScreen skeletonScreen;
     private LinearLayout divContainer;
@@ -104,11 +104,11 @@ public class HomeFragment extends Fragment {
 
         homePresenter = new HomePresenter();
         anggotaModels = new ArrayList<>();
-        homeAdapter = new HomeAdapter(getActivity(), anggotaModels);
+        homeListPengurusHorizontalAdapter = new HomeListPengurusHorizontalAdapter(getActivity(), anggotaModels);
         homePresenter.getDataAnggota(getActivity(), id, rvDaftarPengurus);
         homePresenter.countData(getActivity(), id, tvJumlahAnggota, tvJumlahPemakaianRuangan);
         rvDaftarPengurus.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        rvDaftarPengurus.setAdapter(homeAdapter);
+        rvDaftarPengurus.setAdapter(homeListPengurusHorizontalAdapter);
 
         // TODO PAgination
         NoPaginate noPaginate = NoPaginate.with(rvDaftarPengurus)

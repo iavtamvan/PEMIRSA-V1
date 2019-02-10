@@ -3,7 +3,6 @@ package com.pemirsa.pemirsa.presenter;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.pemirsa.pemirsa.adapter.HomeAdapter;
 import com.pemirsa.pemirsa.model.ErrorMsgModel;
 import com.pemirsa.pemirsa.rest.ApiServiceServer;
 import com.pemirsa.pemirsa.rest.ClientServer;

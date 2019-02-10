@@ -10,6 +10,9 @@ public class AnggotaModel {
     @SerializedName("nim_anggota")
     private String nimAnggota;
 
+    @SerializedName("organisasi_anggota")
+    private String organisasiAnggota;
+
     @SerializedName("created_at")
     private String createdAt;
 
@@ -21,6 +24,9 @@ public class AnggotaModel {
 
     @SerializedName("url_foto_ktm_anggota")
     private String urlFotoKtmAnggota;
+
+    @SerializedName("token_anggota")
+    private Object tokenAnggota;
 
     @SerializedName("prodi_anggota")
     private String prodiAnggota;
@@ -43,104 +49,60 @@ public class AnggotaModel {
     @SerializedName("status_anggota")
     private String statusAnggota;
 
-    public void setNoHpAnggota(String noHpAnggota) {
-        this.noHpAnggota = noHpAnggota;
-    }
-
     public String getNoHpAnggota() {
         return noHpAnggota;
-    }
-
-    public void setNimAnggota(String nimAnggota) {
-        this.nimAnggota = nimAnggota;
     }
 
     public String getNimAnggota() {
         return nimAnggota;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public String getOrganisasiAnggota() {
+        return organisasiAnggota;
     }
 
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
-    }
-
     public String getIdUser() {
         return idUser;
-    }
-
-    public void setJabatanAnggota(String jabatanAnggota) {
-        this.jabatanAnggota = jabatanAnggota;
     }
 
     public String getJabatanAnggota() {
         return jabatanAnggota;
     }
 
-    public void setUrlFotoKtmAnggota(String urlFotoKtmAnggota) {
-        this.urlFotoKtmAnggota = urlFotoKtmAnggota;
-    }
-
     public String getUrlFotoKtmAnggota() {
         return urlFotoKtmAnggota;
     }
 
-    public void setProdiAnggota(String prodiAnggota) {
-        this.prodiAnggota = prodiAnggota;
+    public Object getTokenAnggota() {
+        return tokenAnggota;
     }
 
     public String getProdiAnggota() {
         return prodiAnggota;
     }
 
-    public void setEmailAnggota(String emailAnggota) {
-        this.emailAnggota = emailAnggota;
-    }
-
     public String getEmailAnggota() {
         return emailAnggota;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUrlFotoAnggota(String urlFotoAnggota) {
-        this.urlFotoAnggota = urlFotoAnggota;
-    }
-
     public String getUrlFotoAnggota() {
         return urlFotoAnggota;
-    }
-
-    public void setNamaAnggota(String namaAnggota) {
-        this.namaAnggota = namaAnggota;
     }
 
     public String getNamaAnggota() {
         return namaAnggota;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getId() {
         return id;
-    }
-
-    public void setStatusAnggota(String statusAnggota) {
-        this.statusAnggota = statusAnggota;
     }
 
     public String getStatusAnggota() {

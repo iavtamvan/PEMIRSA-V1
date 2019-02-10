@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_klik"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/iv_list_pengurus_circle"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:layout_margin="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/logo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_list_pengurus_nama"
+                    android:layout_width="match_parent"
+                    android:fontFamily="@font/manrope_light_font"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:text="Nama pengurus"
+                    android:textColor="@android:color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_list_pengurus_nim"
+                    android:layout_width="match_parent"
+                    android:fontFamily="@font/manrope_light_font"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:text="Nim pengurus"
+                    android:textColor="@android:color/black"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/tv_list_pengurus_nohp"
+                    android:layout_width="match_parent"
+                    android:fontFamily="@font/manrope_light_font"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:text="No Hp pengurus"
+                    android:textColor="@color/colorAbuAbuGelap"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_list_pengurus_createdat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/manrope_light_font"
+                    android:gravity="right"
+                    android:text="Craeted At"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="11dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

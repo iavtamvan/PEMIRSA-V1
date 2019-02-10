@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="iav"
+                android:fontFamily="@font/manrope_light_font"
                 android:id="@+id/tv_list_anggota_nama"
                 android:textColor="@android:color/black"
                 android:layout_marginTop="3dp"

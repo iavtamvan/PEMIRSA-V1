@@ -2,6 +2,7 @@ package com.pemirsa.pemirsa.presenter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,7 +27,7 @@ import retrofit2.Response;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class DaftarPenggunaanRuanganPresenter {
+public class PenggunaanRuanganPresenter {
     private ApiServiceServer apiServiceServer;
     private ArrayList<ErrorMsgModel> errorMsgModels = new ArrayList<>();
     private ArrayList<ListRuanganModel> listRuanganModels = new ArrayList<>();
@@ -134,6 +135,28 @@ public class DaftarPenggunaanRuanganPresenter {
 
                     @Override
                     public void onFailure(Call<ArrayList<AnggotaModel>> call, Throwable t) {
+                        Toast.makeText(context, "" + Config.ERROR_INTERNET, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void cekListRuangan(final Context context, final RecyclerView rv){
+        apiServiceServer = ClientServer.getInstanceRetrofit();
+        apiServiceServer.getDataListRuangan("kosong")
+                .enqueue(new Callback<ArrayList<ListRuanganModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ListRuanganModel>> call, Response<ArrayList<ListRuanganModel>> response) {
+                        if (response.isSuccessful()){
+                            listRuanganModels = response.body();
+                            // bikin adapter, xml, view
+
+                        } else {
+                            Toast.makeText(context, "" + Config.DATA_KOSONG, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ListRuanganModel>> call, Throwable t) {
                         Toast.makeText(context, "" + Config.ERROR_INTERNET, Toast.LENGTH_SHORT).show();
                     }
                 });
