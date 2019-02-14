@@ -16,6 +16,7 @@ public final class Config {
     public static final String DATA_KOSONG =  "Data kosong";
 
     public static final String ID = "id_user";
+    public static final String ID_RUANGAN = "id_ruangan";
     public static final String NAMA_ORGANISASI = "nama_organisasi";
     public static final String JENIS_ORGANISASI = "jenis_organisasi";
     public static final String EMAIL = "email";
@@ -56,6 +57,7 @@ public final class Config {
 
     public static final String DATE_PICKER_FRAGMENT_DIALOG = "DatePickerFragmentDialog";
     public static final String TIME_PICKER_FRAGMENT_DIALOG = "TimePickerFragmentDialog";
+
 
     public static String getDateOnly(long time) {
         return new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(time);

@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.pemirsa.pemirsa.ui.fragment.data.CekRuanganFragment;
 import com.pemirsa.pemirsa.ui.fragment.data.ListPengurusFragment;
 import com.pemirsa.pemirsa.ui.fragment.data.RiwayatPenggunaanRuanganFragment;
 import com.pemirsa.pemirsa.ui.fragment.form.DaftarPenggunaanRuanganFragment;
@@ -122,7 +123,10 @@ public class HomeActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.containerViewPager, new RiwayatPenggunaanRuanganFragment()).commit();
             getSupportActionBar().setTitle("Riwayat P.Ruangan");
         } else if (id == R.id.nav_data_cek_penggunaan_ruangan) {
-
+            fab.setVisibility(View.GONE);
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.containerViewPager, new CekRuanganFragment()).commit();
+            getSupportActionBar().setTitle("Cek ruangan Kosong");
         } else if (id == R.id.nav_profil) {
 
         } else if (id == R.id.nav_keluar) {

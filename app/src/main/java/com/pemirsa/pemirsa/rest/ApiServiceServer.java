@@ -60,7 +60,7 @@ public interface ApiServiceServer {
                                                     @Field("token_anggota") String token_anggota
                                                     );
     @FormUrlEncoded
-    @POST("daftarruangan")
+    @POST("daftarruangan/{id}")
     Call<ArrayList<ErrorMsgModel>> postDataPenggunaanRuangan(
                                                         @Field("id_user") String id_user,
                                                         @Field("id_anggota") String id_anggota,
@@ -77,7 +77,8 @@ public interface ApiServiceServer {
                                                         @Field("url_file_daftar_ruangan") String url_file_daftar_ruangan,
                                                         @Field("url_foto_pj") String url_foto_pj,
                                                         @Field("status_daftar_ruangan") String status_daftar_ruangan,
-                                                        @Field("token_daftar_ruangan") String token_daftar_ruangan);
+                                                        @Field("token_daftar_ruangan") String token_daftar_ruangan,
+                                                        @Path("id") String id_ruangan);
 
 
     @GET("getLatLong.php")

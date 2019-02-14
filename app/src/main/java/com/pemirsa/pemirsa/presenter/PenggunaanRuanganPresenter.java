@@ -2,6 +2,7 @@ package com.pemirsa.pemirsa.presenter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.pemirsa.pemirsa.R;
+import com.pemirsa.pemirsa.adapter.ListCekRuanganKosongAdapter;
 import com.pemirsa.pemirsa.helper.Config;
 import com.pemirsa.pemirsa.model.AnggotaModel;
 import com.pemirsa.pemirsa.model.ErrorMsgModel;
@@ -37,14 +39,15 @@ public class PenggunaanRuanganPresenter {
     private List<String> dataAnggota = new ArrayList<>();
     private ArrayAdapter<String> arrayAdapterRuangan;
     private ArrayAdapter<String> arrayAdapterAnggota;
+    private ListCekRuanganKosongAdapter listCekRuanganKosongAdapter;
     private String idAnggota;
     private String urlFotoPj;
     private String namAnggota;
 
 
-    public void sendDataPenggunaanRuangan(final Context context, String id_user, String id_anggota, String nama_daftar_ruangan, String nama_acara, String deskripsi_acara, String tgl_mulai_daftar_ruangan, String tgl_selesai_daftar_ruangan, String jam_mulai_daftar_ruangan, String jam_selesai_daftar_ruangan, String nama_organisasi_daftar_ruangan, String pj_daftar_ruangan, String jumlah_peserta_daftar_ruangan, String url_file_daftar_ruangan, String url_foto_pj, String status_daftar_ruangan, String token_daftar_ruangan){
+    public void sendDataPenggunaanRuangan(final Context context, String id_user, String id_anggota, String nama_daftar_ruangan, String nama_acara, String deskripsi_acara, String tgl_mulai_daftar_ruangan, String tgl_selesai_daftar_ruangan, String jam_mulai_daftar_ruangan, String jam_selesai_daftar_ruangan, String nama_organisasi_daftar_ruangan, String pj_daftar_ruangan, String jumlah_peserta_daftar_ruangan, String url_file_daftar_ruangan, String url_foto_pj, String status_daftar_ruangan, String token_daftar_ruangan, String id_ruangan){
         apiServiceServer = ClientServer.getInstanceRetrofit();
-        apiServiceServer.postDataPenggunaanRuangan(id_user, id_anggota, nama_daftar_ruangan, nama_acara, deskripsi_acara, tgl_mulai_daftar_ruangan, tgl_selesai_daftar_ruangan, jam_mulai_daftar_ruangan, jam_selesai_daftar_ruangan,nama_organisasi_daftar_ruangan, pj_daftar_ruangan, jumlah_peserta_daftar_ruangan, url_file_daftar_ruangan, url_foto_pj, status_daftar_ruangan, token_daftar_ruangan)
+        apiServiceServer.postDataPenggunaanRuangan(id_user, id_anggota, nama_daftar_ruangan, nama_acara, deskripsi_acara, tgl_mulai_daftar_ruangan, tgl_selesai_daftar_ruangan, jam_mulai_daftar_ruangan, jam_selesai_daftar_ruangan,nama_organisasi_daftar_ruangan, pj_daftar_ruangan, jumlah_peserta_daftar_ruangan, url_file_daftar_ruangan, url_foto_pj, status_daftar_ruangan, token_daftar_ruangan, id_ruangan)
                 .enqueue(new Callback<ArrayList<ErrorMsgModel>>() {
                     @Override
                     public void onResponse(Call<ArrayList<ErrorMsgModel>> call, Response<ArrayList<ErrorMsgModel>> response) {
@@ -69,12 +72,19 @@ public class PenggunaanRuanganPresenter {
                 .enqueue(new Callback<ArrayList<ListRuanganModel>>() {
                     @Override
                     public void onResponse(Call<ArrayList<ListRuanganModel>> call, Response<ArrayList<ListRuanganModel>> response) {
-                        listRuanganModels = response.body();
                         if (response.isSuccessful()){
+                            listRuanganModels = response.body();
                             for (int i = 0; i < listRuanganModels.size(); i++) {
                                 dataRuangan.add(listRuanganModels.get(i).getNamaRuangan());
+                                String idRuangan = listRuanganModels.get(i).getId();
                                 arrayAdapterRuangan = new ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, dataRuangan);
                                 spinner.setAdapter(arrayAdapterRuangan);
+                                spinner.clearFocus();
+//                                SharedPreferences sharedPreferences = context.getSharedPreferences(Config.SHARED_PRED_NAME, Context.MODE_PRIVATE);
+//                                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                                editor.putString(Config.ID_RUANGAN, idRuangan);
+//
+//                                editor.apply();
 
 
                             }
@@ -106,7 +116,6 @@ public class PenggunaanRuanganPresenter {
                                     @Override
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                         namAnggota = spinner.getSelectedItem().toString().trim();
-                                        Toast.makeText(context, "" + namAnggota, Toast.LENGTH_SHORT).show();
                                         for (AnggotaModel s : anggotaModels) {
                                             if (s.getNamaAnggota() != null && s.getNamaAnggota().contains(namAnggota)) {
                                                 idAnggota = s.getId();
@@ -149,6 +158,10 @@ public class PenggunaanRuanganPresenter {
                         if (response.isSuccessful()){
                             listRuanganModels = response.body();
                             // bikin adapter, xml, view
+                            listCekRuanganKosongAdapter = new ListCekRuanganKosongAdapter(context, listRuanganModels);
+                            rv.setAdapter(listCekRuanganKosongAdapter);
+                            rv.setLayoutManager(new LinearLayoutManager(context));
+                            listCekRuanganKosongAdapter.notifyDataSetChanged();
 
                         } else {
                             Toast.makeText(context, "" + Config.DATA_KOSONG, Toast.LENGTH_SHORT).show();

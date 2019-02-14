@@ -19,7 +19,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:id="@+id/iv_list_daftar_ruangan"
-                android:src="@drawable/logo" />
+                android:src="@drawable/account" />
 
         </LinearLayout>
 

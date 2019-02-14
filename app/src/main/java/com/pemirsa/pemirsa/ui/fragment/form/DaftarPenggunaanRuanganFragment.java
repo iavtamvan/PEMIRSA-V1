@@ -1,18 +1,23 @@
 package com.pemirsa.pemirsa.ui.fragment.form;
 
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
@@ -22,13 +27,17 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.obsez.android.lib.filechooser.ChooserDialog;
+import com.pemirsa.pemirsa.HomeActivity;
 import com.pemirsa.pemirsa.R;
 import com.pemirsa.pemirsa.helper.Config;
 import com.pemirsa.pemirsa.model.AnggotaModel;
+import com.pemirsa.pemirsa.model.ListRuanganModel;
 import com.pemirsa.pemirsa.model.Result;
 import com.pemirsa.pemirsa.presenter.PenggunaanRuanganPresenter;
 import com.pemirsa.pemirsa.rest.ApiServiceServer;
+import com.pemirsa.pemirsa.rest.ClientServer;
 import com.pemirsa.pemirsa.rest.uploadImage.RetroClient;
+import com.pemirsa.pemirsa.ui.fragment.data.RiwayatPenggunaanRuanganFragment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -74,15 +83,18 @@ public class DaftarPenggunaanRuanganFragment extends Fragment {
 
     private PenggunaanRuanganPresenter penggunaanRuanganPresenter;
     private ArrayList<AnggotaModel> anggotaModels = new ArrayList<>();
-    private String prodi, idAnggota, idUser, urlFotoPj;
+    private ArrayList<ListRuanganModel> listRuanganModels = new ArrayList<>();
+    private String prodi, idAnggota, idUser, urlFotoPj, idRuangan;
 
     private int mYear, mMonth, mDay, mHour, mMinute;
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private String urlFileProposal;
-    private String path;
-    private String displayName;
+    private String urlFileProposal, path;
+
+
+    private FragmentManager fragmentManager;
+    FloatingActionButton fab;
 
     public DaftarPenggunaanRuanganFragment() {
         // Required empty public constructor
@@ -95,6 +107,7 @@ public class DaftarPenggunaanRuanganFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_daftar_penggunaan_ruangan, container, false);
         initView(view);
+        penggunaanRuanganPresenter = new PenggunaanRuanganPresenter();
 
         sharedPreferences = getActivity().getSharedPreferences(Config.SHARED_PRED_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -103,7 +116,11 @@ public class DaftarPenggunaanRuanganFragment extends Fragment {
         idUser = sharedPreferences.getString(Config.ID, "");
         idAnggota = sharedPreferences.getString(Config.IDANGGOTA, "");
         urlFotoPj = sharedPreferences.getString(Config.URLFOTOPJ, "");
-        Log.d(TAG, "idUser: " + idUser);
+        penggunaanRuanganPresenter.spinnerListRuangan(getActivity(), spnNamaRuangan);
+        penggunaanRuanganPresenter.spinnerListAnggota(getActivity(), spnPenanggungJawabRuangan, prodi);
+
+//        idRuangan = sharedPreferences.getString(Config.ID_RUANGAN, "");
+        Log.d(TAG, "idUser: " + idUser + "idRuangan > " + idRuangan);
 //        Toast.makeText(getActivity(), "anggota ? " + idAnggota, Toast.LENGTH_SHORT).show();
 
         if (idAnggota==null && urlFotoPj==null){
@@ -113,9 +130,7 @@ public class DaftarPenggunaanRuanganFragment extends Fragment {
         tvTokenPenggunaanRuangan.setText("PEMIRSA-" +UUID.randomUUID().toString());
         tvNamaOrganisasi.setText(prodi);
 
-        penggunaanRuanganPresenter = new PenggunaanRuanganPresenter();
-        penggunaanRuanganPresenter.spinnerListAnggota(getActivity(), spnPenanggungJawabRuangan, prodi);
-        penggunaanRuanganPresenter.spinnerListRuangan(getActivity(), spnNamaRuangan);
+
 
         btnKirimPenggunaanRuangan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -237,6 +252,44 @@ public class DaftarPenggunaanRuanganFragment extends Fragment {
                         .show();
             }
         });
+        spnNamaRuangan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ApiServiceServer apiServiceServer = ClientServer.getInstanceRetrofit();
+                apiServiceServer.getDataListRuangan("kosong")
+                        .enqueue(new Callback<ArrayList<ListRuanganModel>>() {
+                            @Override
+                            public void onResponse(Call<ArrayList<ListRuanganModel>> call, Response<ArrayList<ListRuanganModel>> response) {
+                                if (response.isSuccessful()){
+                                    listRuanganModels = response.body();
+                                    for (ListRuanganModel s : listRuanganModels){
+                                        if (s.getNamaRuangan() != null && s.getNamaRuangan().contains(spnNamaRuangan.getSelectedItem().toString().trim())){
+                                            idRuangan = s.getId();
+                                            Toast.makeText(getActivity(), "" + idRuangan, Toast.LENGTH_SHORT).show();
+                                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Config.SHARED_PRED_NAME, Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putString(Config.ID_RUANGAN, idRuangan);
+
+                                            editor.apply();
+                                        }
+                                    }
+                                } else {
+                                    Toast.makeText(getActivity(), "" + Config.DATA_KOSONG, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ArrayList<ListRuanganModel>> call, Throwable t) {
+                                Toast.makeText(getActivity(), "" + Config.ERROR_INTERNET, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         return view;
@@ -256,13 +309,13 @@ public class DaftarPenggunaanRuanganFragment extends Fragment {
         MultipartBody.Part part = MultipartBody.Part.createFormData("uploaded_file", f.toString(), requestFile);
         Call<Result> resultCAll = s.postIMmage(part);
         resultCAll.enqueue(new Callback<Result>() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {
 
                 p.dismiss();
                 if (response.isSuccessful()) {
                     if (response.body().getResult().equals("success")) {
-                        Toast.makeText(getActivity(), "Sukses", Toast.LENGTH_SHORT).show();
                         editor.putString(Config.PATH_FILE_PROPOSAL, "http://indiku.id/image/upload_client/" + f.getName());
                         urlFileProposal = "http://indiku.id/image/upload_client/" + f.getName();
                         editor.apply();
@@ -272,7 +325,12 @@ public class DaftarPenggunaanRuanganFragment extends Fragment {
                                 tvTanggalSelesaiDaftarRuangan.getText().toString().trim(),tvJamMulaiDaftarRuangan.getText().toString().trim(),
                                 tvJamSelesaiDaftarRuangan.getText().toString().trim(), tvNamaOrganisasi.getText().toString().trim(),
                                 spnPenanggungJawabRuangan.getSelectedItem().toString().trim(),edtJumlahPeserta.getText().toString().trim(),
-                                urlFileProposal,urlFotoPj,"Booking",tvTokenPenggunaanRuangan.getText().toString().trim());
+                                urlFileProposal,urlFotoPj,"Waiting",tvTokenPenggunaanRuangan.getText().toString().trim(), idRuangan);
+//                        fab.setVisibility(View.GONE);
+                        fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.containerViewPager, new RiwayatPenggunaanRuanganFragment()).commit();
+//                        getActivity().getActionBar().setTitle("Riwayat P.Ruangan");
+//                        .getSupportActionBar().setTitle("Riwayat P.Ruangan");
 
                     } else {
                         Toast.makeText(getActivity(), "Gagal else", Toast.LENGTH_SHORT).show();

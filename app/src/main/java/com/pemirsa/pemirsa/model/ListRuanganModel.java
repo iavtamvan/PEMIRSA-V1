@@ -38,7 +38,7 @@ public class ListRuanganModel {
     private String urlFoto3Ruangan;
 
     @SerializedName("id")
-    private int id;
+    private String id;
 
     @SerializedName("nama_ruangan")
     private String namaRuangan;
@@ -134,11 +134,11 @@ public class ListRuanganModel {
         return urlFoto3Ruangan;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
