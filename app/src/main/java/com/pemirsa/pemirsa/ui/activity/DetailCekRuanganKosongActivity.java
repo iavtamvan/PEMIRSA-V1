@@ -1,0 +1,15 @@
+package com.pemirsa.pemirsa.ui.activity;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import com.pemirsa.pemirsa.R;
+
+public class DetailCekRuanganKosongActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail_cek_ruangan_kosong);
+    }
+}

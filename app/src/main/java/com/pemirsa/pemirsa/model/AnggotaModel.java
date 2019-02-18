@@ -26,7 +26,7 @@ public class AnggotaModel {
     private String urlFotoKtmAnggota;
 
     @SerializedName("token_anggota")
-    private Object tokenAnggota;
+    private String tokenAnggota;
 
     @SerializedName("prodi_anggota")
     private String prodiAnggota;
@@ -77,7 +77,7 @@ public class AnggotaModel {
         return urlFotoKtmAnggota;
     }
 
-    public Object getTokenAnggota() {
+    public String getTokenAnggota() {
         return tokenAnggota;
     }
 

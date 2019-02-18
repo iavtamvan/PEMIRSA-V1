@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    tools:context=".ui.activity.DetailPenggunaanRuanganActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="4dp">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/error_image"
+                            android:id="@+id/iv_detail_penggunaan_ruangan"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Nama Ruangannya"
+                                android:id="@+id/tv_detail_penggunaan_ruangan_nama"
+                                android:fontFamily="@font/manrope_light_font"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/black"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                android:background="@drawable/tv_ovals"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_detail_penggunaan_ruangan_nama_organisasi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="4dp"
+                                    android:fontFamily="@font/manrope_light_font"
+                                    android:text="Nama Organisasi"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="10dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="bottom|right"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/manrope_light_font"
+                                    android:text="Status Penggunaan"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="8dp" />
+
+                                <Button
+                                    android:id="@+id/btn_detail_penggunaan_ruangan_status"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/btn_bg_aktif"
+                                    android:fontFamily="@font/manrope_light_font"
+                                    android:text="Aktif"
+                                    android:textColor="@android:color/white" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorAbuAbu"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/people_anggotas" />
+
+                            <TextView
+                                android:id="@+id/tv_detail_penggunaan_ruangan_target_peserta"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/manrope_light_font"
+                                android:gravity="center"
+                                android:text="Target Peserta\n 2000"
+                                android:textColor="@android:color/black"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_margin="10dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<ImageView-->
+                                <!--android:layout_width="20dp"-->
+                                <!--android:layout_height="20dp"-->
+                                <!--android:src="@drawable/account" />-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/tv_jumlah_ph"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:fontFamily="@font/manrope_light_font"-->
+                                <!--android:gravity="center"-->
+                                <!--android:text="10 Pengurus"-->
+                                <!--android:textColor="@android:color/black"-->
+                                <!--android:textSize="12dp"-->
+                                <!--android:textStyle="bold" />-->
+
+                        <!--</LinearLayout>-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_margin="10dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<ImageView-->
+                                <!--android:layout_width="20dp"-->
+                                <!--android:layout_height="20dp"-->
+                                <!--android:src="@drawable/people_anggotas" />-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/tv_jumlah_pemakaian_ruangan"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:fontFamily="@font/manrope_light_font"-->
+                                <!--android:gravity="center"-->
+                                <!--android:text="3 Kali Pengunaan\nRuangan"-->
+                                <!--android:textColor="@android:color/black"-->
+                                <!--android:textSize="12dp" />-->
+                        <!--</LinearLayout>-->
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:fontFamily="@font/manrope_light_font"
+                android:layout_height="wrap_content"
+                android:gravity="center|left"
+                android:layout_marginTop="8dp"
+                android:text="Info Acara"
+                android:textColor="@android:color/black"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardElevation="2dp"
+                app:cardCornerRadius="4dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="35dp"
+                                android:src="@drawable/ic_delete_black_24dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:fontFamily="@font/manrope_light_font"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center|left"
+                                    android:text="Penanggung Jawab Kegiatan"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="13dp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:id="@+id/tv_detail_penggunaan_ruangan_pj"
+                                    android:layout_width="match_parent"
+                                    android:fontFamily="@font/manrope_light_font"
+                                    android:layout_height="match_parent"
+                                    android:gravity="bottom"
+                                    android:text="PJ pengurus"
+                                    android:textColor="@color/colorAbuAbuGelap"
+                                    android:textSize="10dp" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="35dp"
+                                android:src="@drawable/ic_delete_black_24dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:fontFamily="@font/manrope_light_font"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center|left"
+                                    android:text="Nama Acara"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="13dp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:id="@+id/tv_detail_penggunaan_ruangan_nama_acara"
+                                    android:layout_width="match_parent"
+                                    android:fontFamily="@font/manrope_light_font"
+                                    android:layout_height="match_parent"
+                                    android:gravity="bottom"
+                                    android:text="Nama acara"
+                                    android:textColor="@color/colorAbuAbuGelap"
+                                    android:textSize="10dp" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="35dp"
+                                android:src="@drawable/ic_delete_black_24dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:fontFamily="@font/manrope_light_font"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center|left"
+                                    android:text="Hari dan Tanggal (mulai)"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="13dp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:id="@+id/tv_detail_penggunaan_ruangan_hari_tanggal_mulai"
+                                    android:layout_width="match_parent"
+                                    android:fontFamily="@font/manrope_light_font"
+                                    android:layout_height="match_parent"
+                                    android:gravity="bottom"
+                                    android:text="hari tanggal mulai"
+                                    android:textColor="@color/colorAbuAbuGelap"
+                                    android:textSize="10dp" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="35dp"
+                                android:src="@drawable/ic_delete_black_24dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:fontFamily="@font/manrope_light_font"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center|left"
+                                    android:text="Hari dan Tanggal (selesai)"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="13dp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:id="@+id/tv_detail_penggunaan_ruangan_hari_tanggal_selesai"
+                                    android:layout_width="match_parent"
+                                    android:fontFamily="@font/manrope_light_font"
+                                    android:layout_height="match_parent"
+                                    android:gravity="bottom"
+                                    android:text="No Hp pengurus"
+                                    android:textColor="@color/colorAbuAbuGelap"
+                                    android:textSize="10dp" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitXY"
+                        android:id="@+id/iv_detail_penggunaan_ruangan_fotopj"
+                        android:src="@drawable/error_image"/>
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"/>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:cardElevation="2dp"
+                app:cardCornerRadius="4dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/ic_delete_black_24dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:fontFamily="@font/manrope_light_font"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|left"
+                            android:text="Deskripsi Acara"
+                            android:textColor="@android:color/black"
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tv_detail_penggunaan_ruangan_deskripsi_acara"
+                            android:layout_width="match_parent"
+                            android:fontFamily="@font/manrope_light_font"
+                            android:layout_height="match_parent"
+                            android:gravity="bottom"
+                            android:text="No Hp pengurus"
+                            android:textColor="@color/colorAbuAbuGelap"
+                            android:textSize="10dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:fontFamily="@font/manrope_light_font"
+                android:layout_height="wrap_content"
+                android:gravity="center|left"
+                android:layout_marginTop="8dp"
+                android:text="Info Berkas"
+                android:textColor="@android:color/black"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="2dp"
+                app:cardCornerRadius="4dp"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/ic_delete_black_24dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:fontFamily="@font/manrope_light_font"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:text="File Permohonan"
+                                android:textColor="@android:color/black"
+                                android:textSize="13dp"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/tv_detail_penggunaan_ruangan_file_permohonan"
+                                android:layout_width="match_parent"
+                                android:fontFamily="@font/manrope_light_font"
+                                android:layout_height="match_parent"
+                                android:gravity="bottom"
+                                android:text="No Hp pengurus"
+                                android:textColor="@color/colorAbuAbuGelap"
+                                android:textSize="10dp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/ic_delete_black_24dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:fontFamily="@font/manrope_light_font"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:text="Penggunaan Ruangan"
+                                android:textColor="@android:color/black"
+                                android:textSize="13dp"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/tv_detail_penggunaan_ruangan_token"
+                                android:layout_width="match_parent"
+                                android:fontFamily="@font/manrope_light_font"
+                                android:layout_height="match_parent"
+                                android:gravity="bottom"
+                                android:text="token"
+                                android:textColor="@android:color/holo_red_light"
+                                android:textSize="10dp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

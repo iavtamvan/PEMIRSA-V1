@@ -2,6 +2,8 @@ package com.pemirsa.pemirsa.adapter;
 
 import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +15,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.pemirsa.pemirsa.R;
+import com.pemirsa.pemirsa.helper.Config;
 import com.pemirsa.pemirsa.model.AnggotaModel;
+import com.pemirsa.pemirsa.ui.activity.DetailPengurusActivity;
 
 import java.util.ArrayList;
 
@@ -36,12 +40,36 @@ public class ListPengurusVerticalAdapter extends RecyclerView.Adapter<ListPengur
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Glide.with(context).load(anggotaModels.get(i).getUrlFotoAnggota()).apply(new RequestOptions().override(300,300)).into(viewHolder.ivListPengurusCircle);
         viewHolder.tvListPengurusNama.setText(anggotaModels.get(i).getNamaAnggota());
         viewHolder.tvListPengurusNim.setText(anggotaModels.get(i).getNimAnggota());
         viewHolder.tvListPengurusNohp.setText(anggotaModels.get(i).getNoHpAnggota());
         viewHolder.tvListPengurusCreatedat.setText(anggotaModels.get(i).getCreatedAt());
+
+        viewHolder.cvKlik.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailPengurusActivity.class);
+                intent.putExtra(Config.BUNDLE_ID_PENGURUS, anggotaModels.get(i).getId());
+                intent.putExtra(Config.BUNDLE_ID_USER, anggotaModels.get(i).getIdUser());
+                intent.putExtra(Config.BUNDLE_NAMA_ANGGOTA, anggotaModels.get(i).getNamaAnggota());
+                intent.putExtra(Config.BUNDLE_NIM_ANGGOTA, anggotaModels.get(i).getNimAnggota());
+                intent.putExtra(Config.BUNDLE_ORGANISASI_ANGGOTA, anggotaModels.get(i).getOrganisasiAnggota());
+                intent.putExtra(Config.BUNDLE_PRODI_ANGGOTA, anggotaModels.get(i).getProdiAnggota());
+                intent.putExtra(Config.BUNDLE_EMAIL_ANGGOTA, anggotaModels.get(i).getEmailAnggota());
+                intent.putExtra(Config.BUNDLE_JABATAN_ANGGOTA, anggotaModels.get(i).getJabatanAnggota());
+                intent.putExtra(Config.BUNDLE_NO_HP_ANGGOTA, anggotaModels.get(i).getNoHpAnggota());
+                intent.putExtra(Config.BUNDLE_URL_FOTO_KTM_ANGGOTA, anggotaModels.get(i).getUrlFotoKtmAnggota());
+                intent.putExtra(Config.BUNDLE_URL_FOTO_ANGGOTA, anggotaModels.get(i).getUrlFotoAnggota());
+                intent.putExtra(Config.BUNDLE_STATUS_ANGGOTA, anggotaModels.get(i).getStatusAnggota());
+                intent.putExtra(Config.BUNDLE_TOKEN_ANGGOTA, anggotaModels.get(i).getTokenAnggota());
+                intent.putExtra(Config.CREATED_AT, anggotaModels.get(i).getCreatedAt());
+                context.startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override

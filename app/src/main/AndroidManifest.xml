@@ -3,11 +3,9 @@
     package="com.pemirsa.pemirsa">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -15,8 +13,7 @@
 
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="false"></uses-feature>
-
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -41,8 +38,11 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".SplashActivity"></activity>
-        <activity android:name=".ui.activity.ListDaftarPengurusActivity"></activity>
+        <activity android:name=".SplashActivity" />
+        <activity android:name=".ui.activity.ListDaftarPengurusActivity" />
+        <activity android:name=".ui.activity.DetailCekRuanganKosongActivity" />
+        <activity android:name=".ui.activity.DetailPengurusActivity" />
+        <activity android:name=".ui.activity.DetailPenggunaanRuanganActivity"></activity>
     </application>
 
 </manifest>
