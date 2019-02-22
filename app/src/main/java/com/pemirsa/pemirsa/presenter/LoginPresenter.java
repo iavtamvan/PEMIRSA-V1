@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import com.pemirsa.pemirsa.HomeActivity;
 import com.pemirsa.pemirsa.helper.Config;
-import com.pemirsa.pemirsa.model.CountDataModel;
 import com.pemirsa.pemirsa.model.LoginModel;
 import com.pemirsa.pemirsa.rest.ApiServiceServer;
 import com.pemirsa.pemirsa.rest.ClientServer;
@@ -76,7 +75,7 @@ public class LoginPresenter {
                         editorl.putString(Config.STATUS_ORGANISASI,status_organisasi);
                         editorl.putString(Config.STATUS_APLIKASI,status_aplikasi);
                         editorl.putString(Config.DESKRIPSI_ORGANISASI,deskripsi_organisasi);
-                        editorl.putString(Config.TOKEN_FIREBASE,token_firebase);
+                        editorl.putString(Config.TOKEN_FIREBASE_REG_ID,token_firebase);
                         editorl.putString(Config.HARDWARE_ID,hardware_id);
                         editorl.putString(Config.USERNAME,username);
                         editorl.putString(Config.PASSWORD,created_at);

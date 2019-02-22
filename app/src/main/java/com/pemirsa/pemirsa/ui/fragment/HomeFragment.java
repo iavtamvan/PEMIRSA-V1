@@ -153,7 +153,7 @@ public class HomeFragment extends Fragment {
         status_organisasi = sharedPreferences.getString(Config.STATUS_ORGANISASI, "");
         status_aplikasi = sharedPreferences.getString(Config.STATUS_APLIKASI, "");
         deskripsi_organisasi = sharedPreferences.getString(Config.DESKRIPSI_ORGANISASI, "");
-        token_firebase = sharedPreferences.getString(Config.TOKEN_FIREBASE, "");
+        token_firebase = sharedPreferences.getString(Config.TOKEN_FIREBASE_REG_ID, "");
         hardware_id = sharedPreferences.getString(Config.HARDWARE_ID, "");
         username = sharedPreferences.getString(Config.USERNAME, "");
         created_at = sharedPreferences.getString(Config.PASSWORD, "");

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
@@ -13,13 +15,422 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <!--<android.support.design.widget.NavigationView-->
+    <!--android:id="@+id/nav_view"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="start"-->
+    <!--android:fitsSystemWindows="true"-->
+    <!--app:headerLayout="@layout/nav_header_home"-->
+    <!--app:menu="@menu/activity_home_drawer" />-->
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_235sdp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_home"
-        app:menu="@menu/activity_home_drawer" />
+        android:background="@color/colorWhite"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_27sdp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/divHeaderLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/ivAvatar"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginLeft="@dimen/_18sdp"
+                    android:layout_marginTop="0dp"
+                    android:src="@drawable/account" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_nama_organisasi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="0dp"
+                        android:text="NAMA USER"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/_11sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:text="Email@"
+                        android:textColor="#434343"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_5sdp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:text="Sentuh untuk melihat profil"
+                        android:textColor="#7c7c7c"
+                        android:textSize="@dimen/_8sdp"
+                        android:textStyle="italic" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/_10sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/_10sdp">
+
+                    <TextView
+                        android:id="@+id/tv_apps_version"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:paddingLeft="@dimen/_8sdp"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:paddingBottom="@dimen/_2sdp"
+                        android:text="App version"
+                        android:textSize="@dimen/_8sdp"
+                        android:textStyle="italic" />
+
+                    <LinearLayout
+                        android:id="@+id/div_Beranda"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/_14sdp"
+                        android:paddingRight="@dimen/_14sdp">
+
+                        <ImageView
+                            android:id="@+id/ib_beranda"
+                            android:layout_width="@dimen/_16sdp"
+                            android:layout_height="@dimen/_16sdp"
+                            android:src="@drawable/account" />
+
+                        <TextView
+                            android:id="@+id/tv_beranda"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_6sdp"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_6sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_6sdp"
+                            android:text="Beranda"
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginBottom="@dimen/_6sdp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_6sdp"
+                        android:text="Form"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.6sp"
+                        android:background="#c5c5c5" />
+
+                    <LinearLayout
+                        android:id="@+id/div_Daftar_Pengurus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/_14sdp"
+                        android:paddingRight="@dimen/_14sdp">
+
+                        <ImageView
+                            android:id="@+id/iv_daftar_pengurus"
+                            android:layout_width="@dimen/_16sdp"
+                            android:layout_height="@dimen/_16sdp"
+                            android:src="@drawable/account" />
+
+                        <TextView
+                            android:id="@+id/tv_daftar_pengurus"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_6sdp"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_6sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_6sdp"
+                            android:text="Daftar Pengurus"
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/div_Daftar_Penggunaan_Ruangan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/_14sdp"
+                        android:paddingRight="@dimen/_14sdp">
+
+                        <ImageView
+                            android:id="@+id/iv_penggunaan_ruangan"
+                            android:layout_width="@dimen/_16sdp"
+                            android:layout_height="@dimen/_16sdp"
+                            android:src="@drawable/account" />
+
+                        <TextView
+                            android:id="@+id/tv_penggunaan_ruangan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_6sdp"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_6sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_6sdp"
+
+                            android:text="Penggunaan Ruangan"
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginBottom="@dimen/_6sdp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_6sdp"
+                        android:text="Data"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.6sp"
+                        android:background="#c5c5c5" />
+
+
+                    <!-- tabungan -->
+                    <LinearLayout
+                        android:id="@+id/div_Data_Pengurus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/_14sdp"
+                        android:paddingRight="@dimen/_14sdp">
+
+                        <ImageView
+                            android:id="@+id/iv_data_pengurus"
+                            android:layout_width="@dimen/_16sdp"
+                            android:layout_height="@dimen/_16sdp"
+                            android:src="@drawable/account" />
+
+                        <TextView
+                            android:id="@+id/tv_data_pengurus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_6sdp"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_6sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_6sdp"
+
+                            android:text="Data Pengurus"
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+                    <!-- profil -->
+                    <LinearLayout
+                        android:id="@+id/div_Riwayat_Penggunaan_Ruangan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/_14sdp"
+                        android:paddingRight="@dimen/_14sdp"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/iv_riwayat_penggunaan_ruangan"
+                            android:layout_width="@dimen/_16sdp"
+                            android:layout_height="@dimen/_16sdp"
+                            android:src="@drawable/account" />
+
+                        <TextView
+                            android:id="@+id/tv_riwayat_penggunaan_ruangan"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_6sdp"
+
+                            android:text="Riwayat Penggunaan Ruangan"
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/div_Cek_Ruangan_Kosong"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/_14sdp"
+                        android:paddingRight="@dimen/_14sdp"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/iv_Cek_Ruangan_Kosong"
+                            android:layout_width="@dimen/_16sdp"
+                            android:layout_height="@dimen/_16sdp"
+                            android:src="@drawable/account" />
+
+                        <TextView
+                            android:id="@+id/tv_Cek_Ruangan_Kosong"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_6sdp"
+
+                            android:text="Cek Ruangan Kosong"
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginBottom="@dimen/_6sdp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_6sdp"
+                        android:text="Akun"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.6sp"
+                        android:background="#c5c5c5" />
+
+
+                    <LinearLayout
+                        android:id="@+id/div_Profil"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/_14sdp"
+                        android:paddingRight="@dimen/_14sdp"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/iv_profil"
+                            android:layout_width="@dimen/_16sdp"
+                            android:layout_height="@dimen/_16sdp"
+                            android:src="@drawable/account" />
+
+                        <TextView
+                            android:id="@+id/tv_Profil"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_6sdp"
+
+                            android:text="Profil"
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <!-- logout -->
+                    <LinearLayout
+                        android:id="@+id/div_Logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/_14sdp"
+                        android:paddingRight="@dimen/_14sdp"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/iv_logout"
+                            android:layout_width="@dimen/_16sdp"
+                            android:layout_height="@dimen/_16sdp"
+                            android:src="@drawable/account" />
+
+                        <TextView
+                            android:id="@+id/tv_logout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_6sdp"
+                            android:text="Keluar"
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+    </android.support.design.widget.NavigationView>
+
 
 </android.support.v4.widget.DrawerLayout>

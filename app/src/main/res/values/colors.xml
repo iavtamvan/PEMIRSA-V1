@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#2196f3</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimaryDark">#0068ba</color>
     <color name="colorAccent">#2196f3</color>
 
     <color name="backgroundColor">#E8E8E0</color>
     <color name="backgroundColorPress">#DBDBD3</color>
 
-
+    <color name="colorWhite">#ffffff</color>
     <color name="colorHijau">#629c44</color>
     <color name="colorBiru">#2196f3</color>
     <color name="colorAbuAbu">#cccccc</color>

@@ -32,30 +32,24 @@ public final class Config {
     public static final String STATUS_ORGANISASI = "status_organisasi";
     public static final String STATUS_APLIKASI = "status_aplikasi";
     public static final String DESKRIPSI_ORGANISASI = "deskripsi_organisasi";
-    public static final String TOKEN_FIREBASE = "token_firebase";
+    public static final String TOKEN_FIREBASE_REG_ID = "token_firebasesssssss";
     public static final String HARDWARE_ID = "hardware_id";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
     public static final String CREATED_AT = "created_at";
     public static final String UPDATED_AT = "updated_at";
-
     public static final String IDANGGOTA = "idAnggota";
     public static final String URLFOTOPJ = "urlFotoPj";
-
     public static final String COUNT_DATA_TABLE_ANGGOTA = "count_data_table_anggota";
     public static final String COUNT_DATA_TABLE_PEMAKAIAN_RUANG = "count_data_table_pemakaian_ruang";
-
-
-    public static final String BUNDLE_TYPE_DAFTAR_PENGURUS = "bundle_type_daftar_pengurus";
-
     public static final String PATH_IMAGE = "path_image";
     public static final String PATH_FILE_PROPOSAL = "path_file_proposal";
-
-
     public static final String DATE_PICKER_FRAGMENT_DIALOG = "DatePickerFragmentDialog";
     public static final String TIME_PICKER_FRAGMENT_DIALOG = "TimePickerFragmentDialog";
 
 
+    //bundle
+    public static final String BUNDLE_TYPE_DAFTAR_PENGURUS = "bundle_type_daftar_pengurus";
     public static final String BUNDLE_ID_PENGURUS = "id_pengurus";
     public static final String BUNDLE_ID_USER = "id_user";
     public static final String BUNDLE_NAMA_ANGGOTA = "nama_anggota";
@@ -87,6 +81,16 @@ public final class Config {
     public static final String BUNDLE_STATUS_DAFTAR_RUANGAN = "status_daftar_ruangan";
     public static final String BUNDLE_RATE_RUANGAN = "rate_ruangan";
     public static final String BUNDLE_TOKEN_DAFTAR_RUANGAN = "token_daftar_ruangan";
+
+
+
+    // broadcast receiver intent filters
+    public static final String REGISTRATION_COMPLETE = "registrationComplete";
+    public static final String PUSH_NOTIFICATION = "pushNotification";
+    public static final String TOPIC_GLOBAL = "global";
+    // id to handle the notification in the notification tray
+    public static final int NOTIFICATION_ID = 100;
+    public static final int NOTIFICATION_ID_BIG_IMAGE = 101;
 
 
     public static String getDateOnly(long time) {
